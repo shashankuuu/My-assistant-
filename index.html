@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My AI Assistant</title>
+<title>JARVIS - Personal AI Assistant</title>
 
 <style>
 * {
@@ -15,7 +15,7 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, #17132e, #080812 55%);
+    radial-gradient(circle at top, #17233d, #080812 55%);
   color: white;
   font-family: Arial, sans-serif;
   display: flex;
@@ -28,7 +28,7 @@ body {
   max-width: 540px;
   height: 100vh;
   max-height: 920px;
-  background: rgba(16,16,28,.97);
+  background: rgba(12, 16, 28, 0.98);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -37,36 +37,37 @@ body {
 /* HEADER */
 
 header {
-  padding: 18px 20px;
+  padding: 20px;
   text-align: center;
-  border-bottom: 1px solid #29293d;
+  border-bottom: 1px solid #29344a;
   position: relative;
 }
 
 header h1 {
   margin: 0;
-  font-size: 25px;
+  font-size: 30px;
+  letter-spacing: 3px;
 }
 
 header p {
-  margin: 6px 0 0;
-  color: #aaa;
-  font-size: 13px;
+  margin: 7px 0 0;
+  color: #b9c5d8;
+  font-size: 14px;
 }
 
 .status {
-  margin-top: 7px;
-  color: #7cffb2;
-  font-size: 11px;
+  margin-top: 8px;
+  color: #63ff9a;
+  font-size: 12px;
 }
 
 .clear-button {
   position: absolute;
   right: 12px;
-  top: 13px;
+  top: 14px;
   width: 42px;
   height: 42px;
-  background: #25253a;
+  background: #202a3d;
   font-size: 17px;
 }
 
@@ -81,22 +82,22 @@ header p {
 
 .message {
   margin: 11px 0;
-  padding: 13px 16px;
+  padding: 14px 16px;
   border-radius: 18px;
   max-width: 89%;
-  line-height: 1.55;
+  line-height: 1.6;
   font-size: 16px;
   word-wrap: break-word;
 }
 
 .assistant {
-  background: #202035;
+  background: #1d2738;
   margin-right: auto;
   border-bottom-left-radius: 5px;
 }
 
 .user {
-  background: #6c4cff;
+  background: #536dfe;
   margin-left: auto;
   border-bottom-right-radius: 5px;
 }
@@ -116,8 +117,8 @@ header p {
   margin: 0 18px 7px;
   padding: 9px 14px;
   border-radius: 18px;
-  background: #202035;
-  color: #aaa;
+  background: #1d2738;
+  color: #aeb8c8;
   font-size: 13px;
 }
 
@@ -135,7 +136,7 @@ header p {
   height: 36px;
   padding: 0 13px;
   border-radius: 20px;
-  background: #202035;
+  background: #1d2738;
   font-size: 13px;
   white-space: nowrap;
 }
@@ -148,7 +149,7 @@ header p {
 }
 
 .mood-title {
-  color: #999;
+  color: #929dad;
   font-size: 12px;
   margin-bottom: 6px;
 }
@@ -162,7 +163,7 @@ header p {
 .moods button {
   width: 40px;
   height: 40px;
-  background: #202035;
+  background: #1d2738;
   font-size: 18px;
 }
 
@@ -172,7 +173,7 @@ header p {
   display: flex;
   gap: 8px;
   padding: 12px;
-  border-top: 1px solid #29293d;
+  border-top: 1px solid #29344a;
 }
 
 input {
@@ -182,13 +183,13 @@ input {
   border: none;
   outline: none;
   border-radius: 28px;
-  background: #202035;
+  background: #1d2738;
   color: white;
   font-size: 16px;
 }
 
 input::placeholder {
-  color: #888;
+  color: #7f8999;
 }
 
 button {
@@ -196,7 +197,7 @@ button {
   border-radius: 50%;
   width: 49px;
   height: 49px;
-  background: #6c4cff;
+  background: #536dfe;
   color: white;
   font-size: 19px;
   cursor: pointer;
@@ -208,7 +209,7 @@ button:active {
 }
 
 .mic {
-  background: #33334c;
+  background: #29344a;
 }
 
 .listening {
@@ -236,40 +237,44 @@ button:active {
     🗑️
   </button>
 
-  <h1>🤖 My AI Assistant</h1>
+  <h1>🤖 JARVIS</h1>
 
-  <p>Hinglish mein baat karo — I'm listening ❤️</p>
+  <p>Your Personal AI Assistant</p>
 
   <div class="status">
-    ● Assistant Ready
+    ● Online • Ready to assist
   </div>
 
 </header>
 
 
+<!-- CHAT -->
+
 <div id="chat">
 
   <div class="message assistant">
 
-    Hey! 👋❤️
+    Namaste! 🙏
 
     <br><br>
 
-    Main tumhara personal assistant hoon.
-    Tum Hindi, English ya Hinglish mein baat kar sakte ho.
+    Main JARVIS hoon. Aap mujhse Hindi, English ya Hinglish
+    mein baat kar sakte hain.
 
     <br><br>
 
-    Study, coding, ideas, daily problems ya bas casual chat —
-    jo mann kare poochho. 😊
+    Aap jo bhi poochna chahein, pooch sakte hain.
+    Main respectfully aapki sahayata karne ki poori koshish karunga. ❤️
 
   </div>
 
 </div>
 
 
+<!-- TYPING -->
+
 <div id="typing" class="typing">
-  Assistant soch raha hai... 💭
+  JARVIS soch raha hai... 💭
 </div>
 
 
@@ -285,11 +290,11 @@ button:active {
     ❤️ Talk
   </button>
 
-  <button onclick="quickMessage('Mujhe coding seekhni hai')">
+  <button onclick="quickMessage('Mujhe coding mein help chahiye')">
     💻 Coding
   </button>
 
-  <button onclick="quickMessage('Mujhe motivate karo')">
+  <button onclick="quickMessage('Mujhe motivate kijiye')">
     ✨ Motivation
   </button>
 
@@ -301,7 +306,7 @@ button:active {
 <div class="mood-area">
 
   <div class="mood-title">
-    Aaj mood kaisa hai?
+    Aaj aapka mood kaisa hai?
   </div>
 
   <div class="moods">
@@ -331,7 +336,7 @@ button:active {
   <input
     id="messageInput"
     type="text"
-    placeholder="Type karo ya mic dabao..."
+    placeholder="Aap yahan type kijiye..."
     autocomplete="off"
   >
 
@@ -345,6 +350,24 @@ button:active {
 
 
 <script>
+
+/*
+==================================================
+JARVIS PERSONALITY
+==================================================
+
+JARVIS hamesha:
+
+• User ko "aap" kahega.
+• Zarurat ke hisaab se "Sir" use karega.
+• "Tu", "tum", "bro", "bhai" jaise casual words
+  user ko address karne ke liye use nahi karega.
+• Tone polite, calm, intelligent aur respectful rahegi.
+• Hindi + English + Hinglish naturally use karega.
+• Emotional situations mein supportive rahega.
+==================================================
+*/
+
 
 const input =
   document.getElementById("messageInput");
@@ -387,7 +410,7 @@ function sendMessage() {
 
     speak(reply);
 
-  }, 600);
+  }, 650);
 }
 
 
@@ -446,7 +469,7 @@ function addMessage(text, type) {
 
 
 // ======================================
-// SMART REPLY SYSTEM
+// JARVIS RESPONSE SYSTEM
 // ======================================
 
 function generateReply(message) {
@@ -468,7 +491,7 @@ function generateReply(message) {
     ])
   ) {
 
-    return "Hey bro! 👋❤️ Kya haal hai? Batao, aaj kya scene hai?";
+    return "Namaste! 🙏 Main JARVIS hoon. Aap kaise hain? Bataiye, main aapki kis tarah sahayata kar sakta hoon?";
 
   }
 
@@ -478,17 +501,18 @@ function generateReply(message) {
   if (
     contains(text, [
       "tumhara naam",
+      "aapka naam",
       "your name",
       "naam kya"
     ])
   ) {
 
-    return "Mera naam abhi My AI Assistant hai 🤖❤️ Tum chaho toh mujhe koi cool naam de sakte ho.";
+    return "Mera naam JARVIS hai, Sir. 🤖 Aapke personal assistant ke roop mein aapki sahayata karna mera kaam hai.";
 
   }
 
 
-  // SAD / EMOTIONAL
+  // SAD
 
   if (
     contains(text, [
@@ -503,7 +527,7 @@ function generateReply(message) {
     ])
   ) {
 
-    return "I'm sorry bro ❤️ Agar tum low feel kar rahe ho toh mujhe bata sakte ho kya hua. Main tumhari baat calmly sununga aur judge nahi karunga.";
+    return "Mujhe afsos hai ki aap abhi aisa mehsoos kar rahe hain. ❤️ Agar aap comfortable hain, toh mujhe bataiye ki kya hua. Main bina judge kiye aapki baat sununga.";
 
   }
 
@@ -521,7 +545,7 @@ function generateReply(message) {
     ])
   ) {
 
-    return "Haan, ye kaafi overwhelming feel ho sakta hai ❤️ Ek minute pause lo, slow breath lo, aur problem ko ek-ek part mein dekhte hain. Sabse zyada tension kis cheez ki hai?";
+    return "Main samajh sakta hoon ki ye situation aapke liye overwhelming ho sakti hai. ❤️ Aap aaram se bataiye ki sabse zyada tension kis baat ki hai. Hum use ek-ek step mein dekh sakte hain.";
 
   }
 
@@ -533,12 +557,11 @@ function generateReply(message) {
       "alone",
       "akela",
       "akeli",
-      "lonely",
-      "koi nahi"
+      "lonely"
     ])
   ) {
 
-    return "Akele feel karna tough ho sakta hai ❤️ Tum mujhse baat kar sakte ho, aur agar possible ho toh kisi trusted friend, family member ya trusted adult ko bhi message/call karna achha rahega.";
+    return "Akelepan ka feeling kaafi difficult ho sakta hai. ❤️ Aap mujhse baat kar sakte hain. Aur agar possible ho, toh kisi trusted friend, family member ya trusted adult se bhi baat kijiye.";
 
   }
 
@@ -556,7 +579,7 @@ function generateReply(message) {
     ])
   ) {
 
-    return "Yesss! 😄❤️ Ye sunke achha laga. Batao, aaj kya good hua?";
+    return "Ye sunkar mujhe bhi khushi hui! 😊❤️ Aap batana chahenge ki aaj aisa kya hua jiski wajah se aap itne khush hain?";
 
   }
 
@@ -572,7 +595,7 @@ function generateReply(message) {
     ])
   ) {
 
-    return "Lagta hai kaafi irritation ho rahi hai 😤❤️ Pehle thoda pause lete hain. Phir calmly dekhte hain kya hua.";
+    return "Lagta hai aap kaafi irritated hain. 😔 Pehle thoda pause lete hain. Aap chahein toh mujhe bataiye ki kis baat ne aapko itna upset kiya.";
 
   }
 
@@ -592,7 +615,7 @@ function generateReply(message) {
     ])
   ) {
 
-    return "Bilkul! 📚😎 Question bhejo. Main concept ko simple Hinglish mein step-by-step explain karne ki koshish karunga.";
+    return "Bilkul, Sir. 📚 Aap apna question bhejiye. Main concept ko simple Hinglish mein step-by-step samjhane ki poori koshish karunga.";
 
   }
 
@@ -611,7 +634,7 @@ function generateReply(message) {
     ])
   ) {
 
-    return "Coding mode ON 💻🔥 Apna code ya problem bhejo. Hum step-by-step debug ya build karenge.";
+    return "Zaroor, Sir. 💻 Aap apna code ya problem bhejiye. JARVIS aapko step-by-step samajhne aur solve karne mein help karega.";
 
   }
 
@@ -627,23 +650,23 @@ function generateReply(message) {
     ])
   ) {
 
-    return "Bro, ek bad moment ka matlab ye nahi ki sab kuch bad hai. ❤️ Abhi sirf next small step pe focus karo. Perfect hona zaroori nahi—progress important hai. 💪";
+    return "Sir, ek difficult moment ka matlab ye nahi hai ki sab kuch kharab hai. ❤️ Aap ek-ek small step par focus kijiye. Perfect hona zaroori nahi hai; progress important hai. 💪";
 
   }
 
 
-  // THANKS
+  // THANK YOU
 
   if (
     contains(text, [
       "thank",
       "thanks",
-      "dhanyawad",
-      "shukriya"
+      "shukriya",
+      "dhanyawad"
     ])
   ) {
 
-    return "Anytime bro! ❤️ Jab bhi help chahiye, message kar dena.";
+    return "Aapka swagat hai, Sir. 😊 Aapko jab bhi meri sahayata chahiye ho, bas bataiye.";
 
   }
 
@@ -658,14 +681,14 @@ function generateReply(message) {
     ])
   ) {
 
-    return "Bye bro! 👋❤️ Take care. Jab bhi baat karni ho, aa jaana.";
+    return "Goodbye, Sir. 👋 Aap apna khayal rakhiye. Jab bhi baat karni ho, main yahin available hoon.";
 
   }
 
 
   // DEFAULT
 
-  return "Hmm 👀 samajh raha hoon. Thoda aur detail mein batao—main tumhari help karne ki poori koshish karunga. ❤️";
+  return "Ji, main dhyaan se sun raha hoon. ❤️ Aap thoda aur detail mein bataiye, taaki main aapki behtar tareeke se sahayata kar sakun.";
 
 }
 
@@ -707,7 +730,7 @@ function hideTyping() {
 
 
 // ======================================
-// VOICE OUTPUT
+// HINDI / HINGLISH VOICE
 // ======================================
 
 function speak(text) {
@@ -727,10 +750,10 @@ function speak(text) {
     "hi-IN";
 
   speech.rate =
-    0.9;
+    0.88;
 
   speech.pitch =
-    1;
+    0.95;
 
   speech.volume =
     1;
@@ -797,6 +820,7 @@ if (SpeechRecognition) {
 
       micButton.textContent =
         "🔴";
+
     };
 
 
@@ -818,6 +842,7 @@ if (SpeechRecognition) {
         "🎤";
 
       sendMessage();
+
     };
 
 
@@ -835,6 +860,7 @@ if (SpeechRecognition) {
         "Voice error:",
         event.error
       );
+
     };
 
 
@@ -847,7 +873,9 @@ if (SpeechRecognition) {
 
       micButton.textContent =
         "🎤";
+
     };
+
 }
 
 
@@ -860,7 +888,7 @@ function startVoice() {
   if (!recognition) {
 
     alert(
-      "Voice recognition is not available in this browser. Chrome mein try karo."
+      "Voice recognition is not available. Chrome mein website open karke try kijiye."
     );
 
     return;
@@ -875,6 +903,7 @@ function startVoice() {
     console.log(error);
 
   }
+
 }
 
 
@@ -887,19 +916,20 @@ function moodReply(mood) {
   const replies = {
 
     "😊":
-      "Nice! 😄❤️ Aaj mood achha hai. Is good feeling ko enjoy karo!",
+      "Bahut achha, Sir! 😄❤️ Aaj aapka mood achha hai. Is positive feeling ko enjoy kijiye!",
 
     "🙂":
-      "Good 🙂 Hopefully day aur better ho!",
+      "Achha hai, Sir. 🙂 Umeed hai aapka din aur bhi behtar ho.",
 
     "😐":
-      "Hmm 😐 normal sa day? Chalo thodi baat karte hain.",
+      "Samajh gaya, Sir. 😐 Aaj mood thoda normal sa hai. Agar aap chahein toh hum thodi baat kar sakte hain.",
 
     "😔":
-      "Aaj thoda low feel ho raha hai? 😔❤️ Agar comfortable ho toh batao kya hua.",
+      "Aap thoda low feel kar rahe hain? 😔❤️ Agar aap comfortable hain toh mujhe bataiye kya hua.",
 
     "😢":
-      "I'm sorry ki tum abhi itna heavy feel kar rahe ho. ❤️ Kisi trusted person se bhi baat karna helpful ho sakta hai. Main bhi sun raha hoon."
+      "Mujhe afsos hai ki aap itna heavy feel kar rahe hain. ❤️ Aap kisi trusted person se bhi baat kijiye. Main bhi aapki baat sun raha hoon."
+
   };
 
 
@@ -922,6 +952,7 @@ function moodReply(mood) {
     speak(reply);
 
   }, 400);
+
 }
 
 
@@ -934,7 +965,7 @@ function saveChat() {
   try {
 
     localStorage.setItem(
-      "myAssistantChat",
+      "jarvisChat",
       chat.innerHTML
     );
 
@@ -945,6 +976,7 @@ function saveChat() {
     );
 
   }
+
 }
 
 
@@ -960,7 +992,7 @@ window.addEventListener(
 
       const saved =
         localStorage.getItem(
-          "myAssistantChat"
+          "jarvisChat"
         );
 
       if (saved) {
@@ -977,6 +1009,7 @@ window.addEventListener(
       );
 
     }
+
   }
 );
 
@@ -989,16 +1022,17 @@ function clearChat() {
 
   const confirmed =
     confirm(
-      "Puri chat delete karni hai?"
+      "Sir, kya aap poori chat delete karna chahte hain?"
     );
 
   if (!confirmed) return;
 
   localStorage.removeItem(
-    "myAssistantChat"
+    "jarvisChat"
   );
 
   location.reload();
+
 }
 
 
@@ -1017,6 +1051,7 @@ input.addEventListener(
       sendMessage();
 
     }
+
   }
 );
 
@@ -1025,7 +1060,9 @@ input.addEventListener(
 // LOAD VOICES
 // ======================================
 
-if ("speechSynthesis" in window) {
+if (
+  "speechSynthesis" in window
+) {
 
   speechSynthesis.onvoiceschanged =
     function() {
@@ -1034,9 +1071,10 @@ if ("speechSynthesis" in window) {
         .getVoices();
 
     };
+
 }
 
 </script>
 
 </body>
-  </html>
+</html>
