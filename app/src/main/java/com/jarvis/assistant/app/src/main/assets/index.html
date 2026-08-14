@@ -1,0 +1,1097 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>JARVIS - Personal AI Assistant</title>  <style>  
+* {  
+  box-sizing: border-box;  
+}  
+  
+body {  
+  margin: 0;  
+  min-height: 100vh;  
+  background:  
+    radial-gradient(circle at top, #17233d, #080812 55%);  
+  color: white;  
+  font-family: Arial, sans-serif;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}  
+  
+.app {  
+  width: 100%;  
+  max-width: 540px;  
+  height: 100vh;  
+  max-height: 920px;  
+  background: rgba(12, 16, 28, 0.98);  
+  display: flex;  
+  flex-direction: column;  
+  overflow: hidden;  
+}  
+  
+/* HEADER */  
+  
+header {  
+  padding: 20px;  
+  text-align: center;  
+  border-bottom: 1px solid #29344a;  
+  position: relative;  
+}  
+  
+header h1 {  
+  margin: 0;  
+  font-size: 30px;  
+  letter-spacing: 3px;  
+}  
+  
+header p {  
+  margin: 7px 0 0;  
+  color: #b9c5d8;  
+  font-size: 14px;  
+}  
+  
+.status {  
+  margin-top: 8px;  
+  color: #63ff9a;  
+  font-size: 12px;  
+}  
+  
+.clear-button {  
+  position: absolute;  
+  right: 12px;  
+  top: 14px;  
+  width: 42px;  
+  height: 42px;  
+  background: #202a3d;  
+  font-size: 17px;  
+}  
+  
+/* CHAT */  
+  
+#chat {  
+  flex: 1;  
+  overflow-y: auto;  
+  padding: 18px;  
+  scroll-behavior: smooth;  
+}  
+  
+.message {  
+  margin: 11px 0;  
+  padding: 14px 16px;  
+  border-radius: 18px;  
+  max-width: 89%;  
+  line-height: 1.6;  
+  font-size: 16px;  
+  word-wrap: break-word;  
+}  
+  
+.assistant {  
+  background: #1d2738;  
+  margin-right: auto;  
+  border-bottom-left-radius: 5px;  
+}  
+  
+.user {  
+  background: #536dfe;  
+  margin-left: auto;  
+  border-bottom-right-radius: 5px;  
+}  
+  
+.time {  
+  display: block;  
+  font-size: 9px;  
+  opacity: .5;  
+  margin-top: 6px;  
+}  
+  
+/* TYPING */  
+  
+.typing {  
+  display: none;  
+  width: fit-content;  
+  margin: 0 18px 7px;  
+  padding: 9px 14px;  
+  border-radius: 18px;  
+  background: #1d2738;  
+  color: #aeb8c8;  
+  font-size: 13px;  
+}  
+  
+/* QUICK BUTTONS */  
+  
+.quick {  
+  display: flex;  
+  gap: 7px;  
+  padding: 7px 12px;  
+  overflow-x: auto;  
+}  
+  
+.quick button {  
+  width: auto;  
+  height: 36px;  
+  padding: 0 13px;  
+  border-radius: 20px;  
+  background: #1d2738;  
+  font-size: 13px;  
+  white-space: nowrap;  
+}  
+  
+/* MOOD */  
+  
+.mood-area {  
+  padding: 5px 12px;  
+  text-align: center;  
+}  
+  
+.mood-title {  
+  color: #929dad;  
+  font-size: 12px;  
+  margin-bottom: 6px;  
+}  
+  
+.moods {  
+  display: flex;  
+  justify-content: center;  
+  gap: 7px;  
+}  
+  
+.moods button {  
+  width: 40px;  
+  height: 40px;  
+  background: #1d2738;  
+  font-size: 18px;  
+}  
+  
+/* INPUT */  
+  
+.input-area {  
+  display: flex;  
+  gap: 8px;  
+  padding: 12px;  
+  border-top: 1px solid #29344a;  
+}  
+  
+input {  
+  flex: 1;  
+  min-width: 0;  
+  padding: 14px 17px;  
+  border: none;  
+  outline: none;  
+  border-radius: 28px;  
+  background: #1d2738;  
+  color: white;  
+  font-size: 16px;  
+}  
+  
+input::placeholder {  
+  color: #7f8999;  
+}  
+  
+button {  
+  border: none;  
+  border-radius: 50%;  
+  width: 49px;  
+  height: 49px;  
+  background: #536dfe;  
+  color: white;  
+  font-size: 19px;  
+  cursor: pointer;  
+  flex-shrink: 0;  
+}  
+  
+button:active {  
+  transform: scale(.93);  
+}  
+  
+.mic {  
+  background: #29344a;  
+}  
+  
+.listening {  
+  background: #ff416c;  
+  animation: pulse 1s infinite;  
+}  
+  
+@keyframes pulse {  
+  50% {  
+    transform: scale(1.08);  
+  }  
+}  
+</style>  </head>  <body>  <div class="app">  <header>  <button  
+class="clear-button"  
+onclick="clearChat()">
+🗑️
+</button>
+
+  <h1>🤖 JARVIS</h1>    <p>Your Personal AI Assistant</p>    <div class="status">  
+    ● Online • Ready to assist  
+  </div>  </header>  <!-- CHAT -->  <div id="chat">    <div class="message assistant">  Namaste! 🙏  
+
+<br><br>  
+
+Main JARVIS hoon. Aap mujhse Hindi, English ya Hinglish  
+mein baat kar sakte hain.  
+
+<br><br>  
+
+Aap jo bhi poochna chahein, pooch sakte hain.  
+Main respectfully aapki sahayata karne ki poori koshish karunga. ❤️
+
+  </div>  </div>  <!-- TYPING -->  <div id="typing" class="typing">  
+  JARVIS soch raha hai... 💭  
+</div>  <!-- QUICK ACTIONS -->  <div class="quick">    <button onclick="quickMessage('Mujhe padhai mein help chahiye')">  
+    📚 Study  
+  </button>    <button onclick="quickMessage('Mera mood off hai')">  
+    ❤️ Talk  
+  </button>    <button onclick="quickMessage('Mujhe coding mein help chahiye')">  
+    💻 Coding  
+  </button>    <button onclick="quickMessage('Mujhe motivate kijiye')">  
+    ✨ Motivation  
+  </button>  </div>  <!-- MOOD -->  <div class="mood-area">    <div class="mood-title">  
+    Aaj aapka mood kaisa hai?  
+  </div>    <div class="moods">  <button onclick="moodReply('😊')">😊</button>  
+<button onclick="moodReply('🙂')">🙂</button>  
+<button onclick="moodReply('😐')">😐</button>  
+<button onclick="moodReply('😔')">😔</button>  
+<button onclick="moodReply('😢')">😢</button>
+
+  </div>  </div>  <!-- INPUT -->  <div class="input-area">  <button  
+id="micButton"  
+class="mic"  
+onclick="startVoice()">
+🎤
+</button>
+
+<input
+id="messageInput"
+type="text"
+placeholder="Aap yahan type kijiye..."
+autocomplete="off"
+
+> 
+
+  <button onclick="sendMessage()">  
+    ➤  
+  </button>  </div>  </div>  <script>  
+  
+/*  
+==================================================  
+JARVIS PERSONALITY  
+==================================================  
+  
+JARVIS hamesha:  
+  
+• User ko "aap" kahega.  
+• Zarurat ke hisaab se "Sir" use karega.  
+• "Tu", "tum", "bro", "bhai" jaise casual words  
+  user ko address karne ke liye use nahi karega.  
+• Tone polite, calm, intelligent aur respectful rahegi.  
+• Hindi + English + Hinglish naturally use karega.  
+• Emotional situations mein supportive rahega.  
+==================================================  
+*/  
+  
+  
+const input =  
+  document.getElementById("messageInput");  
+  
+const chat =  
+  document.getElementById("chat");  
+  
+const typing =  
+  document.getElementById("typing");  
+  
+const micButton =  
+  document.getElementById("micButton");  
+  
+  
+// ======================================  
+// SEND MESSAGE  
+// ======================================  
+  
+function sendMessage() {  
+  
+  const message =  
+    input.value.trim();  
+  
+  if (!message) return;  
+  
+  addMessage(message, "user");  
+  
+  input.value = "";  
+  
+  showTyping();  
+  
+  setTimeout(() => {  
+  
+    hideTyping();  
+  
+    const reply =  
+      generateReply(message);  
+  
+    addMessage(reply, "assistant");  
+  
+    speak(reply);  
+  
+  }, 650);  
+}  
+  
+  
+// ======================================  
+// QUICK MESSAGE  
+// ======================================  
+  
+function quickMessage(text) {  
+  
+  input.value = text;  
+  
+  sendMessage();  
+  
+}  
+  
+  
+// ======================================  
+// ADD MESSAGE  
+// ======================================  
+  
+function addMessage(text, type) {  
+  
+  const message =  
+    document.createElement("div");  
+  
+  message.className =  
+    "message " + type;  
+  
+  message.textContent =  
+    text;  
+  
+  const time =  
+    document.createElement("span");  
+  
+  time.className =  
+    "time";  
+  
+  time.textContent =  
+    new Date().toLocaleTimeString(  
+      "en-IN",  
+      {  
+        hour: "2-digit",  
+        minute: "2-digit"  
+      }  
+    );  
+  
+  message.appendChild(time);  
+  
+  chat.appendChild(message);  
+  
+  chat.scrollTop =  
+    chat.scrollHeight;  
+  
+  saveChat();  
+}  
+  
+  
+// ======================================  
+// JARVIS RESPONSE SYSTEM  
+// ======================================  
+  
+function generateReply(message) {  
+  
+  const text =  
+    message.toLowerCase();  
+  
+  
+  // GREETING  
+  
+  if (  
+    contains(text, [  
+      "hello",  
+      "hi",  
+      "hey",  
+      "namaste",  
+      "hii",  
+      "helo"  
+    ])  
+  ) {  
+  
+    return "Namaste! 🙏 Main JARVIS hoon. Aap kaise hain? Bataiye, main aapki kis tarah sahayata kar sakta hoon?";  
+  
+  }  
+  
+  
+  // NAME  
+  
+  if (  
+    contains(text, [  
+      "tumhara naam",  
+      "aapka naam",  
+      "your name",  
+      "naam kya"  
+    ])  
+  ) {  
+  
+    return "Mera naam JARVIS hai, Sir. 🤖 Aapke personal assistant ke roop mein aapki sahayata karna mera kaam hai.";  
+  
+  }  
+  
+  
+  // SAD  
+  
+  if (  
+    contains(text, [  
+      "sad",  
+      "dukhi",  
+      "udaas",  
+      "upset",  
+      "rona",  
+      "ro raha",  
+      "ro rahi",  
+      "low feel"  
+    ])  
+  ) {  
+  
+    return "Mujhe afsos hai ki aap abhi aisa mehsoos kar rahe hain. ❤️ Agar aap comfortable hain, toh mujhe bataiye ki kya hua. Main bina judge kiye aapki baat sununga.";  
+  
+  }  
+  
+  
+  // STRESS  
+  
+  if (  
+    contains(text, [  
+      "stress",  
+      "tension",  
+      "pareshan",  
+      "pressure",  
+      "overthinking",  
+      "overthink"  
+    ])  
+  ) {  
+  
+    return "Main samajh sakta hoon ki ye situation aapke liye overwhelming ho sakti hai. ❤️ Aap aaram se bataiye ki sabse zyada tension kis baat ki hai. Hum use ek-ek step mein dekh sakte hain.";  
+  
+  }  
+  
+  
+  // LONELY  
+  
+  if (  
+    contains(text, [  
+      "alone",  
+      "akela",  
+      "akeli",  
+      "lonely"  
+    ])  
+  ) {  
+  
+    return "Akelepan ka feeling kaafi difficult ho sakta hai. ❤️ Aap mujhse baat kar sakte hain. Aur agar possible ho, toh kisi trusted friend, family member ya trusted adult se bhi baat kijiye.";  
+  
+  }  
+  
+  
+  // HAPPY  
+  
+  if (  
+    contains(text, [  
+      "happy",  
+      "khush",  
+      "mast",  
+      "excited",  
+      "acha lag",  
+      "accha lag"  
+    ])  
+  ) {  
+  
+    return "Ye sunkar mujhe bhi khushi hui! 😊❤️ Aap batana chahenge ki aaj aisa kya hua jiski wajah se aap itne khush hain?";  
+  
+  }  
+  
+  
+  // ANGRY  
+  
+  if (  
+    contains(text, [  
+      "angry",  
+      "gussa",  
+      "irritated",  
+      "irritate"  
+    ])  
+  ) {  
+  
+    return "Lagta hai aap kaafi irritated hain. 😔 Pehle thoda pause lete hain. Aap chahein toh mujhe bataiye ki kis baat ne aapko itna upset kiya.";  
+  
+  }  
+  
+  
+  // STUDY  
+  
+  if (  
+    contains(text, [  
+      "padhai",  
+      "study",  
+      "homework",  
+      "exam",  
+      "maths",  
+      "science",  
+      "physics",  
+      "chemistry"  
+    ])  
+  ) {  
+  
+    return "Bilkul, Sir. 📚 Aap apna question bhejiye. Main concept ko simple Hinglish mein step-by-step samjhane ki poori koshish karunga.";  
+  
+  }  
+  
+  
+  // CODING  
+  
+  if (  
+    contains(text, [  
+      "coding",  
+      "code",  
+      "html",  
+      "css",  
+      "javascript",  
+      "website",  
+      "programming"  
+    ])  
+  ) {  
+  
+    return "Zaroor, Sir. 💻 Aap apna code ya problem bhejiye. JARVIS aapko step-by-step samajhne aur solve karne mein help karega.";  
+  
+  }  
+  
+  
+  // MOTIVATION  
+  
+  if (  
+    contains(text, [  
+      "motivate",  
+      "motivation",  
+      "give up",  
+      "haar maan"  
+    ])  
+  ) {  
+  
+    return "Sir, ek difficult moment ka matlab ye nahi hai ki sab kuch kharab hai. ❤️ Aap ek-ek small step par focus kijiye. Perfect hona zaroori nahi hai; progress important hai. 💪";  
+  
+  }  
+  
+  
+  // THANK YOU  
+  
+  if (  
+    contains(text, [  
+      "thank",  
+      "thanks",  
+      "shukriya",  
+      "dhanyawad"  
+    ])  
+  ) {  
+  
+    return "Aapka swagat hai, Sir. 😊 Aapko jab bhi meri sahayata chahiye ho, bas bataiye.";  
+  
+  }  
+  
+  
+  // GOODBYE  
+  
+  if (  
+    contains(text, [  
+      "bye",  
+      "good night",  
+      "gn"  
+    ])  
+  ) {  
+  
+    return "Goodbye, Sir. 👋 Aap apna khayal rakhiye. Jab bhi baat karni ho, main yahin available hoon.";  
+  
+  }  
+  
+  
+  // DEFAULT  
+  
+  return "Ji, main dhyaan se sun raha hoon. ❤️ Aap thoda aur detail mein bataiye, taaki main aapki behtar tareeke se sahayata kar sakun.";  
+  
+}  
+  
+  
+// ======================================  
+// KEYWORD HELPER  
+// ======================================  
+  
+function contains(text, words) {  
+  
+  return words.some(  
+    word => text.includes(word)  
+  );  
+  
+}  
+  
+  
+// ======================================  
+// TYPING  
+// ======================================  
+  
+function showTyping() {  
+  
+  typing.style.display =  
+    "block";  
+  
+  chat.scrollTop =  
+    chat.scrollHeight;  
+  
+}  
+  
+  
+function hideTyping() {  
+  
+  typing.style.display =  
+    "none";  
+  
+}  
+  
+  
+// ======================================  
+// HINDI / HINGLISH VOICE  
+// ======================================  
+  
+function speak(text) {  
+  
+  if (  
+    !("speechSynthesis" in window)  
+  ) {  
+    return;  
+  }  
+  
+  speechSynthesis.cancel();  
+  
+  const speech =  
+    new SpeechSynthesisUtterance(text);  
+  
+  speech.lang =  
+    "hi-IN";  
+  
+  speech.rate =  
+    0.88;  
+  
+  speech.pitch =  
+    0.95;  
+  
+  speech.volume =  
+    1;  
+  
+  const voices =  
+    speechSynthesis.getVoices();  
+  
+  const hindiVoice =  
+    voices.find(  
+      voice =>  
+        voice.lang  
+          .toLowerCase()  
+          .includes("hi-in")  
+    );  
+  
+  if (hindiVoice) {  
+  
+    speech.voice =  
+      hindiVoice;  
+  
+  }  
+  
+  speechSynthesis.speak(  
+    speech  
+  );  
+}  
+  
+  
+// ======================================  
+// VOICE INPUT  
+// ======================================  
+  
+const SpeechRecognition =  
+  window.SpeechRecognition ||  
+  window.webkitSpeechRecognition;  
+  
+let recognition = null;  
+  
+  
+if (SpeechRecognition) {  
+  
+  recognition =  
+    new SpeechRecognition();  
+  
+  recognition.lang =  
+    "hi-IN";  
+  
+  recognition.continuous =  
+    false;  
+  
+  recognition.interimResults =  
+    false;  
+  
+  recognition.maxAlternatives =  
+    1;  
+  
+  
+  recognition.onstart =  
+    function() {  
+  
+      micButton  
+        .classList  
+        .add("listening");  
+  
+      micButton.textContent =  
+        "🔴";  
+  
+    };  
+  
+  
+  recognition.onresult =  
+    function(event) {  
+  
+      const transcript =  
+        event.results[0][0]  
+          .transcript;  
+  
+      input.value =  
+        transcript;  
+  
+      micButton  
+        .classList  
+        .remove("listening");  
+  
+      micButton.textContent =  
+        "🎤";  
+  
+      sendMessage();  
+  
+    };  
+  
+  
+  recognition.onerror =  
+    function(event) {  
+  
+      micButton  
+        .classList  
+        .remove("listening");  
+  
+      micButton.textContent =  
+        "🎤";  
+  
+      console.log(  
+        "Voice error:",  
+        event.error  
+      );  
+  
+    };  
+  
+  
+  recognition.onend =  
+    function() {  
+  
+      micButton  
+        .classList  
+        .remove("listening");  
+  
+      micButton.textContent =  
+        "🎤";  
+  
+    };  
+  
+}  
+  
+  
+// ======================================  
+// START VOICE  
+// ======================================  
+  
+function startVoice() {  
+  
+  if (!recognition) {  
+  
+    alert(  
+      "Voice recognition is not available. Chrome mein website open karke try kijiye."  
+    );  
+  
+    return;  
+  }  
+  
+  try {  
+  
+    recognition.start();  
+  
+  } catch (error) {  
+  
+    console.log(error);  
+  
+  }  
+  
+}  
+  
+  
+// ======================================  
+// MOOD  
+// ======================================  
+  
+function moodReply(mood) {  
+  
+  const replies = {  
+  
+    "😊":  
+      "Bahut achha, Sir! 😄❤️ Aaj aapka mood achha hai. Is positive feeling ko enjoy kijiye!",  
+  
+    "🙂":  
+      "Achha hai, Sir. 🙂 Umeed hai aapka din aur bhi behtar ho.",  
+  
+    "😐":  
+      "Samajh gaya, Sir. 😐 Aaj mood thoda normal sa hai. Agar aap chahein toh hum thodi baat kar sakte hain.",  
+  
+    "😔":  
+      "Aap thoda low feel kar rahe hain? 😔❤️ Agar aap comfortable hain toh mujhe bataiye kya hua.",  
+  
+    "😢":  
+      "Mujhe afsos hai ki aap itna heavy feel kar rahe hain. ❤️ Aap kisi trusted person se bhi baat kijiye. Main bhi aapki baat sun raha hoon."  
+  
+  };  
+  
+  
+  addMessage(  
+    "Mera mood: " + mood,  
+    "user"  
+  );  
+  
+  
+  setTimeout(() => {  
+  
+    const reply =  
+      replies[mood];  
+  
+    addMessage(  
+      reply,  
+      "assistant"  
+    );  
+  
+    speak(reply);  
+  
+  }, 400);  
+  
+}  
+  
+  
+// ======================================  
+// SAVE CHAT  
+// ======================================  
+  
+function saveChat() {  
+  
+  try {  
+  
+    localStorage.setItem(  
+      "jarvisChat",  
+      chat.innerHTML  
+    );  
+  
+  } catch (error) {  
+  
+    console.log(  
+      "Storage unavailable"  
+    );  
+  
+  }  
+  
+}  
+  
+  
+// ======================================  
+// LOAD CHAT  
+// ======================================  
+  
+window.addEventListener(  
+  "load",  
+  function() {  
+  
+    try {  
+  
+      const saved =  
+        localStorage.getItem(  
+          "jarvisChat"  
+        );  
+  
+      if (saved) {  
+  
+        chat.innerHTML =  
+          saved;  
+  
+      }  
+  
+    } catch (error) {  
+  
+      console.log(  
+        "Could not load chat"  
+      );  
+  
+    }  
+  
+  }  
+);  
+  
+  
+// ======================================  
+// CLEAR CHAT  
+// ======================================  
+  
+function clearChat() {  
+  
+  const confirmed =  
+    confirm(  
+      "Sir, kya aap poori chat delete karna chahte hain?"  
+    );  
+  
+  if (!confirmed) return;  
+  
+  localStorage.removeItem(  
+    "jarvisChat"  
+  );  
+  
+  location.reload();  
+  
+}  
+  
+  
+// ======================================  
+// ENTER TO SEND  
+// ======================================  
+  
+input.addEventListener(  
+  "keydown",  
+  function(event) {  
+  
+    if (  
+      event.key === "Enter"  
+    ) {  
+  
+      sendMessage();  
+  
+    }  
+  
+  }  
+);  
+  
+  
+// ======================================  
+// LOAD VOICES  
+// ======================================  
+  
+if (  
+  "speechSynthesis" in window  
+) {  
+  
+  speechSynthesis.onvoiceschanged =  
+    function() {  
+  
+      speechSynthesis  
+        .getVoices();  
+  
+    };  
+  
+}  
+// JARVIS WAKE-WORD  
+if ("webkitSpeechRecognition" in window) {  
+  
+  const jarvisWake = new webkitSpeechRecognition();  
+  
+  jarvisWake.lang = "en-IN";  
+  jarvisWake.continuous = true;  
+  jarvisWake.interimResults = false;  
+  
+  jarvisWake.onresult = function(event) {  
+  
+    const result =  
+      event.results[event.results.length - 1][0]  
+        .transcript  
+        .toLowerCase();  
+  
+    if (result.includes("jarvis")) {  
+  
+      listenForCommand();  
+  
+    }  
+  };  
+  
+  jarvisWake.onerror = function() {  
+    setTimeout(() => {  
+      try {  
+        jarvisWake.start();  
+      } catch (e) {}  
+    }, 1500);  
+  };  
+  
+  jarvisWake.onend = function() {  
+    setTimeout(() => {  
+      try {  
+        jarvisWake.start();  
+      } catch (e) {}  
+    }, 1000);  
+  };  
+  
+  // Start listening  
+  try {  
+    jarvisWake.start();  
+  } catch (e) {}  
+}  
+// JARVIS COMMAND MODE  
+function listenForCommand() {  
+  
+  if (!("webkitSpeechRecognition" in window)) {  
+    speak("Sorry Sir, voice recognition available nahi hai.");  
+    return;  
+  }  
+  
+  const commandRecognition =  
+    new webkitSpeechRecognition();  
+  
+  commandRecognition.lang = "en-IN";  
+commandRecognition.continuous = false;  
+commandRecognition.interimResults = true;  
+  
+  commandRecognition.onstart = function() {  
+    speak("Yes Sir, I am listening.");  
+  };  
+  
+  commandRecognition.onresult = function(event) {  
+  
+  const result =  
+    event.results[event.results.length - 1][0]  
+      .transcript  
+      .toLowerCase();  
+  
+  if (result.trim().length > 0) {  
+    commandRecognition.stop();  
+    handleJarvisCommand(result);  
+  }  
+};  
+  
+  commandRecognition.onerror = function() {  
+    speak("Sorry Sir, main command samajh nahi paya.");  
+  };  
+  
+  commandRecognition.start();  
+}  
+  
+  
+// JARVIS COMMANDS  
+function handleJarvisCommand(command) {  
+  
+  if (  
+    command.includes("hello") ||  
+    command.includes("hi")  
+  ) {  
+  
+    speak(  
+      "Namaste Sir. Main aapki sahayata ke liye ready hoon."  
+    );  
+  
+  }  
+  
+  
