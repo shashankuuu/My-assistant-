@@ -1091,7 +1091,7 @@ if ("webkitSpeechRecognition" in window) {
 
     if (result.includes("jarvis")) {
 
-      speak("Yes Sir, I am listening.");
+      listenForCommand();
 
     }
   };
@@ -1117,6 +1117,88 @@ if ("webkitSpeechRecognition" in window) {
     jarvisWake.start();
   } catch (e) {}
 }
+// JARVIS COMMAND MODE
+function listenForCommand() {
+
+  if (!("webkitSpeechRecognition" in window)) {
+    speak("Sorry Sir, voice recognition available nahi hai.");
+    return;
+  }
+
+  const commandRecognition =
+    new webkitSpeechRecognition();
+
+  commandRecognition.lang = "en-IN";
+  commandRecognition.continuous = false;
+  commandRecognition.interimResults = false;
+
+  commandRecognition.onstart = function() {
+    speak("Yes Sir, I am listening.");
+  };
+
+  commandRecognition.onresult = function(event) {
+
+    const command =
+      event.results[0][0]
+        .transcript
+        .toLowerCase();
+
+    handleJarvisCommand(command);
+  };
+
+  commandRecognition.onerror = function() {
+    speak("Sorry Sir, main command samajh nahi paya.");
+  };
+
+  commandRecognition.start();
+}
+
+
+// JARVIS COMMANDS
+function handleJarvisCommand(command) {
+
+  if (
+    command.includes("hello") ||
+    command.includes("hi")
+  ) {
+
+    speak(
+      "Namaste Sir. Main aapki sahayata ke liye ready hoon."
+    );
+
+  }
+
+  else if (
+    command.includes("how are you") ||
+    command.includes("kaise ho")
+  ) {
+
+    speak(
+      "Main bilkul ready hoon, Sir. Aap batayiye, main aapki kya sahayata kar sakta hoon?"
+    );
+
+  }
+
+  else if (
+    command.includes("thank you") ||
+    command.includes("thanks")
+  ) {
+
+    speak(
+      "Aapka swagat hai, Sir."
+    );
+
+  }
+
+  else {
+
+    speak(
+      "Ji Sir, maine aapki command suni. Is command ke liye action abhi add karna baaki hai."
+    );
+
+  }
+    }
+  
 </script>
 
 </body>
