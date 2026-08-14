@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -14,7 +14,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: #080812;
+  background:
+    radial-gradient(circle at top, #17132e, #080812 55%);
   color: white;
   font-family: Arial, sans-serif;
   display: flex;
@@ -24,10 +25,10 @@ body {
 
 .app {
   width: 100%;
-  max-width: 520px;
+  max-width: 540px;
   height: 100vh;
-  max-height: 900px;
-  background: #10101c;
+  max-height: 920px;
+  background: rgba(16,16,28,.97);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -44,23 +45,29 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 26px;
+  font-size: 25px;
 }
 
 header p {
   margin: 6px 0 0;
   color: #aaa;
-  font-size: 14px;
+  font-size: 13px;
+}
+
+.status {
+  margin-top: 7px;
+  color: #7cffb2;
+  font-size: 11px;
 }
 
 .clear-button {
   position: absolute;
   right: 12px;
-  top: 14px;
+  top: 13px;
   width: 42px;
   height: 42px;
   background: #25253a;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 /* CHAT */
@@ -68,17 +75,17 @@ header p {
 #chat {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 18px;
   scroll-behavior: smooth;
 }
 
 .message {
-  margin: 12px 0;
+  margin: 11px 0;
   padding: 13px 16px;
   border-radius: 18px;
-  max-width: 88%;
+  max-width: 89%;
   line-height: 1.55;
-  font-size: 17px;
+  font-size: 16px;
   word-wrap: break-word;
 }
 
@@ -96,9 +103,9 @@ header p {
 
 .time {
   display: block;
-  font-size: 10px;
-  opacity: 0.55;
-  margin-top: 5px;
+  font-size: 9px;
+  opacity: .5;
+  margin-top: 6px;
 }
 
 /* TYPING */
@@ -106,37 +113,57 @@ header p {
 .typing {
   display: none;
   width: fit-content;
+  margin: 0 18px 7px;
+  padding: 9px 14px;
+  border-radius: 18px;
   background: #202035;
   color: #aaa;
-  padding: 10px 15px;
-  border-radius: 18px;
-  margin: 0 20px 8px;
+  font-size: 13px;
+}
+
+/* QUICK BUTTONS */
+
+.quick {
+  display: flex;
+  gap: 7px;
+  padding: 7px 12px;
+  overflow-x: auto;
+}
+
+.quick button {
+  width: auto;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: 20px;
+  background: #202035;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 /* MOOD */
 
 .mood-area {
-  padding: 8px 15px 3px;
+  padding: 5px 12px;
   text-align: center;
 }
 
 .mood-title {
   color: #999;
-  font-size: 13px;
-  margin-bottom: 7px;
+  font-size: 12px;
+  margin-bottom: 6px;
 }
 
-.mood-buttons {
+.moods {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 7px;
 }
 
-.mood-buttons button {
-  width: 42px;
-  height: 42px;
+.moods button {
+  width: 40px;
+  height: 40px;
   background: #202035;
-  font-size: 19px;
+  font-size: 18px;
 }
 
 /* INPUT */
@@ -144,18 +171,17 @@ header p {
 .input-area {
   display: flex;
   gap: 8px;
-  padding: 14px;
+  padding: 12px;
   border-top: 1px solid #29293d;
-  background: #10101c;
 }
 
 input {
   flex: 1;
   min-width: 0;
-  padding: 15px 18px;
-  border: 0;
+  padding: 14px 17px;
+  border: none;
   outline: none;
-  border-radius: 30px;
+  border-radius: 28px;
   background: #202035;
   color: white;
   font-size: 16px;
@@ -166,19 +192,19 @@ input::placeholder {
 }
 
 button {
-  border: 0;
+  border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 49px;
+  height: 49px;
   background: #6c4cff;
   color: white;
-  font-size: 20px;
+  font-size: 19px;
   cursor: pointer;
   flex-shrink: 0;
 }
 
 button:active {
-  transform: scale(0.92);
+  transform: scale(.93);
 }
 
 .mic {
@@ -206,21 +232,20 @@ button:active {
 
   <button
     class="clear-button"
-    onclick="clearChat()"
-    title="Clear chat">
+    onclick="clearChat()">
     🗑️
   </button>
 
   <h1>🤖 My AI Assistant</h1>
 
-  <p>
-    I'm here to listen ❤️
-  </p>
+  <p>Hinglish mein baat karo — I'm listening ❤️</p>
+
+  <div class="status">
+    ● Assistant Ready
+  </div>
 
 </header>
 
-
-<!-- CHAT -->
 
 <div id="chat">
 
@@ -230,23 +255,44 @@ button:active {
 
     <br><br>
 
-    Main tumhara personal AI assistant hoon.
-    Tum mujhse Hindi, English ya Hinglish mein baat kar sakte ho.
+    Main tumhara personal assistant hoon.
+    Tum Hindi, English ya Hinglish mein baat kar sakte ho.
 
     <br><br>
 
-    Agar kuch tension hai ya bas baat karni hai,
-    feel free to tell me. Main sun raha hoon. ❤️
+    Study, coding, ideas, daily problems ya bas casual chat —
+    jo mann kare poochho. 😊
 
   </div>
 
 </div>
 
 
-<!-- TYPING -->
-
 <div id="typing" class="typing">
-  Assistant type kar raha hai... 💭
+  Assistant soch raha hai... 💭
+</div>
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="quick">
+
+  <button onclick="quickMessage('Mujhe padhai mein help chahiye')">
+    📚 Study
+  </button>
+
+  <button onclick="quickMessage('Mera mood off hai')">
+    ❤️ Talk
+  </button>
+
+  <button onclick="quickMessage('Mujhe coding seekhni hai')">
+    💻 Coding
+  </button>
+
+  <button onclick="quickMessage('Mujhe motivate karo')">
+    ✨ Motivation
+  </button>
+
 </div>
 
 
@@ -255,19 +301,15 @@ button:active {
 <div class="mood-area">
 
   <div class="mood-title">
-    Aaj tumhara mood kaisa hai?
+    Aaj mood kaisa hai?
   </div>
 
-  <div class="mood-buttons">
+  <div class="moods">
 
     <button onclick="moodReply('😊')">😊</button>
-
     <button onclick="moodReply('🙂')">🙂</button>
-
     <button onclick="moodReply('😐')">😐</button>
-
     <button onclick="moodReply('😔')">😔</button>
-
     <button onclick="moodReply('😢')">😢</button>
 
   </div>
@@ -310,11 +352,11 @@ const input =
 const chat =
   document.getElementById("chat");
 
-const micButton =
-  document.getElementById("micButton");
-
 const typing =
   document.getElementById("typing");
+
+const micButton =
+  document.getElementById("micButton");
 
 
 // ======================================
@@ -345,7 +387,20 @@ function sendMessage() {
 
     speak(reply);
 
-  }, 700);
+  }, 600);
+}
+
+
+// ======================================
+// QUICK MESSAGE
+// ======================================
+
+function quickMessage(text) {
+
+  input.value = text;
+
+  sendMessage();
+
 }
 
 
@@ -361,12 +416,14 @@ function addMessage(text, type) {
   message.className =
     "message " + type;
 
-  message.textContent = text;
+  message.textContent =
+    text;
 
   const time =
     document.createElement("span");
 
-  time.className = "time";
+  time.className =
+    "time";
 
   time.textContent =
     new Date().toLocaleTimeString(
@@ -389,7 +446,7 @@ function addMessage(text, type) {
 
 
 // ======================================
-// HINGLISH REPLY SYSTEM
+// SMART REPLY SYSTEM
 // ======================================
 
 function generateReply(message) {
@@ -401,28 +458,52 @@ function generateReply(message) {
   // GREETING
 
   if (
-    text.includes("hello") ||
-    text.includes("hi") ||
-    text.includes("hey") ||
-    text.includes("namaste")
+    contains(text, [
+      "hello",
+      "hi",
+      "hey",
+      "namaste",
+      "hii",
+      "helo"
+    ])
   ) {
 
-    return "Hey! 👋❤️ Kya haal hai? Batao, aaj kya baat karni hai?";
+    return "Hey bro! 👋❤️ Kya haal hai? Batao, aaj kya scene hai?";
 
   }
 
 
-  // SAD
+  // NAME
 
   if (
-    text.includes("sad") ||
-    text.includes("dukhi") ||
-    text.includes("udaas") ||
-    text.includes("upset") ||
-    text.includes("rona")
+    contains(text, [
+      "tumhara naam",
+      "your name",
+      "naam kya"
+    ])
   ) {
 
-    return "Aww ❤️ mujhe afsos hai ki tum abhi aisa feel kar rahe ho. Agar tum comfortable ho toh batao kya hua. Main bina judge kiye sununga.";
+    return "Mera naam abhi My AI Assistant hai 🤖❤️ Tum chaho toh mujhe koi cool naam de sakte ho.";
+
+  }
+
+
+  // SAD / EMOTIONAL
+
+  if (
+    contains(text, [
+      "sad",
+      "dukhi",
+      "udaas",
+      "upset",
+      "rona",
+      "ro raha",
+      "ro rahi",
+      "low feel"
+    ])
+  ) {
+
+    return "I'm sorry bro ❤️ Agar tum low feel kar rahe ho toh mujhe bata sakte ho kya hua. Main tumhari baat calmly sununga aur judge nahi karunga.";
 
   }
 
@@ -430,28 +511,17 @@ function generateReply(message) {
   // STRESS
 
   if (
-    text.includes("stress") ||
-    text.includes("tension") ||
-    text.includes("pareshan") ||
-    text.includes("problem") ||
-    text.includes("pressure")
+    contains(text, [
+      "stress",
+      "tension",
+      "pareshan",
+      "pressure",
+      "overthinking",
+      "overthink"
+    ])
   ) {
 
-    return "Samajh sakta hoon ❤️ jab bahut saari cheezein ek saath ho jaati hain toh kaafi overwhelming lag sakta hai. Ek deep breath lo aur mujhe batao sabse zyada tension kis baat ki hai.";
-
-  }
-
-
-  // HAPPY
-
-  if (
-    text.includes("happy") ||
-    text.includes("khush") ||
-    text.includes("mast") ||
-    text.includes("good")
-  ) {
-
-    return "Yooo! 😄❤️ Ye sunke mujhe bhi achha laga! Batao, aaj itne happy kyun ho?";
+    return "Haan, ye kaafi overwhelming feel ho sakta hai ❤️ Ek minute pause lo, slow breath lo, aur problem ko ek-ek part mein dekhte hain. Sabse zyada tension kis cheez ki hai?";
 
   }
 
@@ -459,12 +529,34 @@ function generateReply(message) {
   // LONELY
 
   if (
-    text.includes("alone") ||
-    text.includes("akela") ||
-    text.includes("lonely")
+    contains(text, [
+      "alone",
+      "akela",
+      "akeli",
+      "lonely",
+      "koi nahi"
+    ])
   ) {
 
-    return "Akele feel karna tough ho sakta hai ❤️ Tum mujhse baat kar sakte ho. Aur agar possible ho toh kisi trusted friend, family member ya trusted adult se bhi connect karna achha rahega.";
+    return "Akele feel karna tough ho sakta hai ❤️ Tum mujhse baat kar sakte ho, aur agar possible ho toh kisi trusted friend, family member ya trusted adult ko bhi message/call karna achha rahega.";
+
+  }
+
+
+  // HAPPY
+
+  if (
+    contains(text, [
+      "happy",
+      "khush",
+      "mast",
+      "excited",
+      "acha lag",
+      "accha lag"
+    ])
+  ) {
+
+    return "Yesss! 😄❤️ Ye sunke achha laga. Batao, aaj kya good hua?";
 
   }
 
@@ -472,32 +564,121 @@ function generateReply(message) {
   // ANGRY
 
   if (
-    text.includes("angry") ||
-    text.includes("gussa") ||
-    text.includes("irritate")
+    contains(text, [
+      "angry",
+      "gussa",
+      "irritated",
+      "irritate"
+    ])
   ) {
 
-    return "Lagta hai tum kaafi irritated ho 😤❤️ Pehle thoda pause lete hain. Agar tum chaho toh mujhe batao kis baat ne itna gussa dilaya.";
+    return "Lagta hai kaafi irritation ho rahi hai 😤❤️ Pehle thoda pause lete hain. Phir calmly dekhte hain kya hua.";
 
   }
 
 
-  // THANK YOU
+  // STUDY
 
   if (
-    text.includes("thank") ||
-    text.includes("thanks") ||
-    text.includes("dhanyawad")
+    contains(text, [
+      "padhai",
+      "study",
+      "homework",
+      "exam",
+      "maths",
+      "science",
+      "physics",
+      "chemistry"
+    ])
   ) {
 
-    return "Anytime bro ❤️ Main yahin hoon jab bhi baat karni ho.";
+    return "Bilkul! 📚😎 Question bhejo. Main concept ko simple Hinglish mein step-by-step explain karne ki koshish karunga.";
+
+  }
+
+
+  // CODING
+
+  if (
+    contains(text, [
+      "coding",
+      "code",
+      "html",
+      "css",
+      "javascript",
+      "website",
+      "programming"
+    ])
+  ) {
+
+    return "Coding mode ON 💻🔥 Apna code ya problem bhejo. Hum step-by-step debug ya build karenge.";
+
+  }
+
+
+  // MOTIVATION
+
+  if (
+    contains(text, [
+      "motivate",
+      "motivation",
+      "give up",
+      "haar maan"
+    ])
+  ) {
+
+    return "Bro, ek bad moment ka matlab ye nahi ki sab kuch bad hai. ❤️ Abhi sirf next small step pe focus karo. Perfect hona zaroori nahi—progress important hai. 💪";
+
+  }
+
+
+  // THANKS
+
+  if (
+    contains(text, [
+      "thank",
+      "thanks",
+      "dhanyawad",
+      "shukriya"
+    ])
+  ) {
+
+    return "Anytime bro! ❤️ Jab bhi help chahiye, message kar dena.";
+
+  }
+
+
+  // GOODBYE
+
+  if (
+    contains(text, [
+      "bye",
+      "good night",
+      "gn"
+    ])
+  ) {
+
+    return "Bye bro! 👋❤️ Take care. Jab bhi baat karni ho, aa jaana.";
 
   }
 
 
   // DEFAULT
 
-  return "Hmm... 👀 Main sun raha hoon. Thoda aur batao—exactly kya hua ya tum abhi kya feel kar rahe ho? ❤️";
+  return "Hmm 👀 samajh raha hoon. Thoda aur detail mein batao—main tumhari help karne ki poori koshish karunga. ❤️";
+
+}
+
+
+// ======================================
+// KEYWORD HELPER
+// ======================================
+
+function contains(text, words) {
+
+  return words.some(
+    word => text.includes(word)
+  );
 
 }
 
@@ -526,7 +707,7 @@ function hideTyping() {
 
 
 // ======================================
-// HINDI/HINGLISH VOICE
+// VOICE OUTPUT
 // ======================================
 
 function speak(text) {
@@ -537,25 +718,25 @@ function speak(text) {
     return;
   }
 
-  window.speechSynthesis.cancel();
+  speechSynthesis.cancel();
 
   const speech =
     new SpeechSynthesisUtterance(text);
 
-  // Hindi voice understands Hinglish reasonably well
-  speech.lang = "hi-IN";
+  speech.lang =
+    "hi-IN";
 
-  speech.rate = 0.9;
+  speech.rate =
+    0.9;
 
-  speech.pitch = 1;
+  speech.pitch =
+    1;
 
-  speech.volume = 1;
-
+  speech.volume =
+    1;
 
   const voices =
-    window.speechSynthesis
-      .getVoices();
-
+    speechSynthesis.getVoices();
 
   const hindiVoice =
     voices.find(
@@ -565,7 +746,6 @@ function speak(text) {
           .includes("hi-in")
     );
 
-
   if (hindiVoice) {
 
     speech.voice =
@@ -573,22 +753,21 @@ function speak(text) {
 
   }
 
-
-  window.speechSynthesis
-    .speak(speech);
-
+  speechSynthesis.speak(
+    speech
+  );
 }
 
 
 // ======================================
-// VOICE RECOGNITION
+// VOICE INPUT
 // ======================================
 
 const SpeechRecognition =
   window.SpeechRecognition ||
   window.webkitSpeechRecognition;
 
-let recognition;
+let recognition = null;
 
 
 if (SpeechRecognition) {
@@ -605,6 +784,9 @@ if (SpeechRecognition) {
   recognition.interimResults =
     false;
 
+  recognition.maxAlternatives =
+    1;
+
 
   recognition.onstart =
     function() {
@@ -615,7 +797,6 @@ if (SpeechRecognition) {
 
       micButton.textContent =
         "🔴";
-
     };
 
 
@@ -637,7 +818,6 @@ if (SpeechRecognition) {
         "🎤";
 
       sendMessage();
-
     };
 
 
@@ -655,7 +835,6 @@ if (SpeechRecognition) {
         "Voice error:",
         event.error
       );
-
     };
 
 
@@ -668,9 +847,7 @@ if (SpeechRecognition) {
 
       micButton.textContent =
         "🎤";
-
     };
-
 }
 
 
@@ -683,13 +860,11 @@ function startVoice() {
   if (!recognition) {
 
     alert(
-      "Voice recognition is not supported. Chrome mein website open karke try karo."
+      "Voice recognition is not available in this browser. Chrome mein try karo."
     );
 
     return;
-
   }
-
 
   try {
 
@@ -700,7 +875,6 @@ function startVoice() {
     console.log(error);
 
   }
-
 }
 
 
@@ -713,19 +887,19 @@ function moodReply(mood) {
   const replies = {
 
     "😊":
-      "Nice! 😄 Aaj mood kaafi achha lag raha hai. Enjoy karo aur batao kya good hua? ❤️",
+      "Nice! 😄❤️ Aaj mood achha hai. Is good feeling ko enjoy karo!",
 
     "🙂":
-      "Good! 🙂 Hopefully tumhara mood aur better ho. Batao, kya chal raha hai?",
+      "Good 🙂 Hopefully day aur better ho!",
 
     "😐":
-      "Hmm 😐 normal day lag raha hai. Chalo thodi baat karte hain.",
+      "Hmm 😐 normal sa day? Chalo thodi baat karte hain.",
 
     "😔":
-      "Aaj thoda low feel ho raha hai? 😔❤️ Agar tum chaho toh mujhe batao kya hua.",
+      "Aaj thoda low feel ho raha hai? 😔❤️ Agar comfortable ho toh batao kya hua.",
 
     "😢":
-      "I'm sorry ki tum itna heavy feel kar rahe ho. 😢❤️ Kisi trusted person se bhi baat karna helpful ho sakta hai. Main bhi sun raha hoon."
+      "I'm sorry ki tum abhi itna heavy feel kar rahe ho. ❤️ Kisi trusted person se bhi baat karna helpful ho sakta hai. Main bhi sun raha hoon."
   };
 
 
@@ -748,7 +922,6 @@ function moodReply(mood) {
     speak(reply);
 
   }, 400);
-
 }
 
 
@@ -758,11 +931,20 @@ function moodReply(mood) {
 
 function saveChat() {
 
-  localStorage.setItem(
-    "myAssistantChat",
-    chat.innerHTML
-  );
+  try {
 
+    localStorage.setItem(
+      "myAssistantChat",
+      chat.innerHTML
+    );
+
+  } catch (error) {
+
+    console.log(
+      "Storage unavailable"
+    );
+
+  }
 }
 
 
@@ -774,18 +956,27 @@ window.addEventListener(
   "load",
   function() {
 
-    const saved =
-      localStorage.getItem(
-        "myAssistantChat"
+    try {
+
+      const saved =
+        localStorage.getItem(
+          "myAssistantChat"
+        );
+
+      if (saved) {
+
+        chat.innerHTML =
+          saved;
+
+      }
+
+    } catch (error) {
+
+      console.log(
+        "Could not load chat"
       );
 
-    if (saved) {
-
-      chat.innerHTML =
-        saved;
-
     }
-
   }
 );
 
@@ -808,12 +999,11 @@ function clearChat() {
   );
 
   location.reload();
-
 }
 
 
 // ======================================
-// ENTER KEY
+// ENTER TO SEND
 // ======================================
 
 input.addEventListener(
@@ -827,7 +1017,6 @@ input.addEventListener(
       sendMessage();
 
     }
-
   }
 );
 
@@ -836,15 +1025,18 @@ input.addEventListener(
 // LOAD VOICES
 // ======================================
 
-window.speechSynthesis.onvoiceschanged =
-  function() {
+if ("speechSynthesis" in window) {
 
-    window.speechSynthesis
-      .getVoices();
+  speechSynthesis.onvoiceschanged =
+    function() {
 
-  };
+      speechSynthesis
+        .getVoices();
+
+    };
+}
 
 </script>
 
 </body>
-</html>
+  </html>
