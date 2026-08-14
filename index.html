@@ -1073,7 +1073,50 @@ if (
     };
 
 }
+// JARVIS WAKE-WORD
+if ("webkitSpeechRecognition" in window) {
 
+  const jarvisWake = new webkitSpeechRecognition();
+
+  jarvisWake.lang = "en-IN";
+  jarvisWake.continuous = true;
+  jarvisWake.interimResults = false;
+
+  jarvisWake.onresult = function(event) {
+
+    const result =
+      event.results[event.results.length - 1][0]
+        .transcript
+        .toLowerCase();
+
+    if (result.includes("jarvis")) {
+
+      speak("Yes Sir, I am listening.");
+
+    }
+  };
+
+  jarvisWake.onerror = function() {
+    setTimeout(() => {
+      try {
+        jarvisWake.start();
+      } catch (e) {}
+    }, 1500);
+  };
+
+  jarvisWake.onend = function() {
+    setTimeout(() => {
+      try {
+        jarvisWake.start();
+      } catch (e) {}
+    }, 1000);
+  };
+
+  // Start listening
+  try {
+    jarvisWake.start();
+  } catch (e) {}
+}
 </script>
 
 </body>
