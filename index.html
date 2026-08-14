@@ -1129,8 +1129,8 @@ function listenForCommand() {
     new webkitSpeechRecognition();
 
   commandRecognition.lang = "en-IN";
-  commandRecognition.continuous = false;
-  commandRecognition.interimResults = false;
+commandRecognition.continuous = false;
+commandRecognition.interimResults = true;
 
   commandRecognition.onstart = function() {
     speak("Yes Sir, I am listening.");
@@ -1138,13 +1138,16 @@ function listenForCommand() {
 
   commandRecognition.onresult = function(event) {
 
-    const command =
-      event.results[0][0]
-        .transcript
-        .toLowerCase();
+  const result =
+    event.results[event.results.length - 1][0]
+      .transcript
+      .toLowerCase();
 
-    handleJarvisCommand(command);
-  };
+  if (result.trim().length > 0) {
+    commandRecognition.stop();
+    handleJarvisCommand(result);
+  }
+};
 
   commandRecognition.onerror = function() {
     speak("Sorry Sir, main command samajh nahi paya.");
